@@ -8,6 +8,10 @@ app.use(bodyParser.json()); // needed for angular requests
 app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
+/* Routes */
+app.use('/api/', );
+app.use('/api/', );
+app.use('/api/', )
 
 
 /** ---------- START SERVER ---------- **/
