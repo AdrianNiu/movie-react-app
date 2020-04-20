@@ -21,7 +21,7 @@ import { HashRouter as Router } from 'react-router-dom';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
     yield takeEvery('SELECTED', getSelectedSaga);
-    yield takeEvery('EDIT_MOVIES', getSelectedSaga);
+    yield takeEvery('EDIT_MOVIES', editMovieSaga);
 }
 
 function* fetchMoviesSaga(action) {
@@ -34,6 +34,16 @@ function* fetchMoviesSaga(action) {
         console.log('error with GET movies from server', error);
     }
 }
+
+function* editMovieSaga(action) {
+    console.log('In editMovieSaga', action);
+    try {
+        yield axios.put(`/api/movie/${action.payload.id}`, action.payload);
+        yield put({ type: 'FETCH_MOVIE' });
+    }
+    catch (error) {
+        console.log('Error on PUT from Server');
+    }
 
 function* getSelectedSaga(action) {
     console.log('In getSelectedSaga', action.payload);
