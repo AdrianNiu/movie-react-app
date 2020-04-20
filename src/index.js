@@ -44,6 +44,7 @@ function* editMovieSaga(action) {
     catch (error) {
         console.log('Error on PUT from Server');
     }
+};
 
 function* getSelectedSaga(action) {
     console.log('In getSelectedSaga', action.payload);

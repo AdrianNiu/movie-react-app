@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 export class EditPage extends Component {
 
     state = {
+        id: this.props.movies.id,
         genre: '',
         description: '',
         title: ''
@@ -25,6 +26,8 @@ export class EditPage extends Component {
     }
 
     handleCancel = () => {
+        console.log(this.state);
+        
         this.props.history.push(`/details`); 
     }
 
