@@ -39,7 +39,7 @@ function* editMovieSaga(action, id) {
     console.log('In editMovieSaga', action.payload);
     try {
         yield axios.put(`/api/movie/${action.payload.id}`, action.payload);
-        yield put({ type: 'SELECTED' });
+        yield put({ type: 'FETCH_MOVIES' });
     }
     catch (error) {
         console.log('Error on PUT from Server');

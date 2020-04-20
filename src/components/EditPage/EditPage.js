@@ -14,7 +14,7 @@ export class EditPage extends Component {
     };
 
     componentDidMount() {
-        // this.props.dispatch({ type: 'FETCH_MOVIES' });
+        // this.props.dispatch({ type: 'SELECTED' });
     }
 
     enterMovieList = () => {
@@ -34,7 +34,7 @@ export class EditPage extends Component {
     handleSave = () => {
         console.log('Edits saved', this.state);
         this.props.dispatch({ type: 'EDIT_MOVIES', payload: this.state });
-        this.props.history.push(`/details/${this.state.id}`);
+        // this.props.history.push(`/details/${this.state.id}`);
     }
 
     handleChange = (event, propertyName) => {
@@ -53,7 +53,9 @@ export class EditPage extends Component {
 
 
                     <div className="movie-detail">
-                        <img src={this.props.selected.poster} alt="Movie poster" /> {this.props.selected.description}
+                        <img src={this.props.selected.poster} alt="Movie poster" /> 
+                        {this.props.selected.title}
+                        {this.props.selected.description}
                         
                         {/* {JSON.stringify(this.props.selected)} */}
                         <button onClick={this.enterEdit}>Edit</button>
