@@ -8,9 +8,9 @@ export class EditPage extends Component {
 
     state = {
         id: this.props.selected.id,
-        // genre: '',
         title: '',
-        description: ''
+        description: '',
+        genre: ''
     };
 
     componentDidMount() {
@@ -45,6 +45,13 @@ export class EditPage extends Component {
         });
     }
 
+    handleChangeGenre = genre => event => {
+        console.log('genre selection', event.target.value);
+        this.setState({
+            genre: event.target.value
+        });
+    }
+
     render() {
         return (
             <>
@@ -60,7 +67,22 @@ export class EditPage extends Component {
                         {/* {JSON.stringify(this.props.selected)} */}
                         <button onClick={this.enterEdit}>Edit</button>
                         <button onClick={this.enterMovieList}>Back to Movie List</button>
-
+                        <select value={this.state.genre} onChange={this.handleChangeGenre('genre')}>
+                            <option value="" />
+                            <option value={'Adventure'}>Adventure</option>
+                            <option value={'Animated'}>Animated</option>
+                            <option value={'Biographical'}>Biographical</option>
+                            <option value={'Comedy'}>Comedy</option>
+                            <option value={'Disaster'}>Disaster</option>
+                            <option value={'Drama'}>Drama</option>
+                            <option value={'Epic'}>Epic</option>
+                            <option value={'Fantasy'}>Fantasy</option>
+                            <option value={'Musical'}>Musical</option>
+                            <option value={'Romantic'}>Romantic</option>
+                            <option value={'Science Fiction'}>Science Fiction</option>
+                            <option value={'Space-Opera'}>Space Opera</option>
+                            <option value={'Super Hero'}>Super Hero</option>
+                        </select>
 
                                 <input onChange={(event) => this.handleChange(event, 'title')} value={this.state.title}></input>
                                 <br />
