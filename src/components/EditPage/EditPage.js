@@ -34,13 +34,6 @@ export class EditPage extends Component {
         this.props.history.push(`/details`);
     }
 
-    handleClick = (button) => {
-        console.log('Got button click', button);
-        if (button === 'save') {
-            console.log('Edits saved');
-            this.props.dispatch({ type: 'EDIT_MOVIE', payload: this.state });
-        }
-
     handleChange = (event, propertyName) => {
         console.log('Got an edit', propertyName, event.target.value)
         this.setState({
