@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import MovieList from '../MovieList/MovieList';
-import MovieDetail from '../MovieDetail/MovieDetail.js';
+import MovieDetail from '../MovieDetail/MovieDetail';
+import EditPage from '../EditPage/EditPage';
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Router>
             <Route exact path='/' component={MovieList} />
             <Route path='/details' component={MovieDetail} />
+            <Route path='/edit' component={EditPage} />
           </Router>
         </div>
       </div>

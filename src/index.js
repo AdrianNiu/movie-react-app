@@ -21,6 +21,7 @@ import { HashRouter as Router } from 'react-router-dom';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
     yield takeEvery('SELECTED', getSelectedSaga);
+    yield takeEvery('EDIT_MOVIES', getSelectedSaga);
 }
 
 function* fetchMoviesSaga(action) {

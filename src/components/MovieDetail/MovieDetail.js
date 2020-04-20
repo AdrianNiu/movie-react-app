@@ -14,16 +14,22 @@ export class MovieDetail extends Component {
         this.props.history.push(`/`);
     }
 
+    enterEdit = () => {
+        this.props.history.push(`/edit`);
+    }
+
     render() {
         return (
             <>
                 <p>Niu Detail Page</p>
                 <section className="movies">
-                <button onClick={this.enterMovieList}>Back to Movie List</button>
+                
 
                     <div className="movie-detail">
-                        {/* <img src={this.props.selected.poster} alt="Movie poster" /> {this.props.selected.description} */}
-                        {JSON.stringify(this.props.selected)}
+                        <img src={this.props.selected.poster} alt="Movie poster" /> {this.props.selected.description}
+                        {/* {JSON.stringify(this.props.selected)} */}
+                        <button onClick={this.enterEdit}>Edit</button>
+                        <button onClick={this.enterMovieList}>Back to Movie List</button>
                     </div>
                 </section>
 
