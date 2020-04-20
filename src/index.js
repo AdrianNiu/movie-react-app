@@ -10,10 +10,41 @@ import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
+import axios from 'axios';
+import { takeEvery, put } from 'redux-saga/effects';
+
+import { HashRouter as Router } from 'react-router-dom';
+
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
+    yield takeEvery('SELECTED', getSelectedSaga);
 }
+
+function* fetchMoviesSaga(action) {
+    console.log('In fetchMoviesSaga', action);
+    try {
+        const response = yield axios.get('/api/movie');
+        console.log('movies from server', response.data);
+        yield put({ type: 'SET_MOVIES', payload: response.data });
+    } catch (error) {
+        console.log('error with GET movies from server', error);
+    }
+}
+
+function* getSelectedSaga(action) {
+    console.log('In getSelectedSaga', action.payload);
+    try {
+        const response = yield axios.post(`/api/movie/details/${action.payload}`, action.payload);
+        yield put({ type: 'SELECTED_MOVIE', payload: response.data });
+        
+    } catch (error) {
+        console.log('error with POST selected movies from server', error);
+    }
+}
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -38,11 +69,22 @@ const genres = (state = [], action) => {
     }
 }
 
+const selectedReducer = (state = {}, action) => {
+    console.log(action.payload);
+    switch (action.type) {
+        case 'SELECTED_MOVIE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedReducer,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -51,6 +93,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><Router><App /></Router></Provider>, 
     document.getElementById('root'));
 registerServiceWorker();
