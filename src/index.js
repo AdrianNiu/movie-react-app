@@ -35,11 +35,11 @@ function* fetchMoviesSaga(action) {
     }
 }
 
-function* editMovieSaga(action) {
-    console.log('In editMovieSaga', action);
+function* editMovieSaga(action, id) {
+    console.log('In editMovieSaga', action.payload);
     try {
         yield axios.put(`/api/movie/${action.payload.id}`, action.payload);
-        yield put({ type: 'FETCH_MOVIE' });
+        yield put({ type: 'SELECTED' });
     }
     catch (error) {
         console.log('Error on PUT from Server');

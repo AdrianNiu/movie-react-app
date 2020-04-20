@@ -33,7 +33,22 @@ router.post('/details/:id', (req, res) => {
         });
 });
 
-
+// Edit the state with the selected id
+router.put(`/:id`, (req, res) => {
+    console.log('The put request is:', req.params.id, req.body);
+    let id = req.params.id;
+    let data = req.body;
+    let queryText = `UPDATE movies SET title = $1, description = $2 WHERE "id" = $3;`;
+    pool.query(queryText, [data.title, data.description, id])
+        .then((result) => {
+            console.log('Successful updated database');
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('Error on PUT change to movie', error);
+            res.sendStatus(500);
+        });
+});
 
 
 

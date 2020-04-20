@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 export class EditPage extends Component {
 
     state = {
-        id: this.props.movies.id,
-        genre: '',
-        description: '',
-        title: ''
+        id: this.props.selected.id,
+        // genre: '',
+        title: '',
+        description: ''
     };
 
     componentDidMount() {
@@ -26,15 +26,15 @@ export class EditPage extends Component {
     }
 
     handleCancel = () => {
-        console.log(this.state);
+        // console.log(this.state);
         
         this.props.history.push(`/details`); 
     }
 
     handleSave = () => {
-        console.log('Edits saved');
-        this.props.dispatch({ type: 'EDIT_MOVIE', payload: this.state });
-        this.props.history.push(`/details`);
+        console.log('Edits saved', this.state);
+        this.props.dispatch({ type: 'EDIT_MOVIES', payload: this.state });
+        this.props.history.push(`/details/${this.state.id}`);
     }
 
     handleChange = (event, propertyName) => {
